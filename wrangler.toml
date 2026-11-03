@@ -1,0 +1,6 @@
+name = "cpi-inflation-calculator-mcp"
+main = "src/worker.ts"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+account_id = "dd3f2a29b7707e21a87f26a622c0bb9d"
+workers_dev = true

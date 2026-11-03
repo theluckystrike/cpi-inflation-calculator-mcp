@@ -1,0 +1,58 @@
+{
+  "name": "cpi-inflation-calculator-mcp",
+  "version": "1.0.0",
+  "description": "MCP server: CPI inflation calculator with official BLS CPI-U, CPI-W and core CPI from 1913 to the latest month, checked live, plus raise-vs-inflation and Social Security COLA.",
+  "type": "module",
+  "bin": {
+    "cpi-inflation-calculator-mcp": "dist/stdio.js"
+  },
+  "main": "dist/stdio.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "DATA_SOURCES.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test test/*.test.mjs",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "claude",
+    "inflation",
+    "inflation-calculator",
+    "cpi",
+    "consumer-price-index",
+    "bls",
+    "cpi-u",
+    "cpi-w",
+    "core-cpi",
+    "social-security-cola",
+    "real-wages",
+    "purchasing-power"
+  ],
+  "author": "theluckystrike",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/cpi-inflation-calculator-mcp.git"
+  },
+  "homepage": "https://statewage.com/pay-raise-calculator/",
+  "mcpName": "io.github.theluckystrike/cpi-inflation-calculator-mcp",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3",
+    "wrangler": "^4.40.0"
+  }
+}

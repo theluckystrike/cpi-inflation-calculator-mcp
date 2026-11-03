@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.theluckystrike/cpi-inflation-calculator-mcp",
+  "title": "CPI Inflation Calculator",
+  "description": "Inflation calculator with official BLS CPI 1913 to the latest month, raise vs inflation, SS COLA.",
+  "version": "1.0.0",
+  "websiteUrl": "https://statewage.com/pay-raise-calculator/",
+  "repository": {
+    "url": "https://github.com/theluckystrike/cpi-inflation-calculator-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://cpi-inflation-calculator-mcp.lipmichal.workers.dev/mcp"
+    }
+  ]
+}
