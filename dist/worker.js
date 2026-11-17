@@ -3,6 +3,23 @@ import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/
 import { createServer } from "./tools.js";
 import { landingPage } from "./landing.js";
 import { setBlsKey } from "./live.js";
+import { LATEST_PROTOCOL_VERSION } from '@modelcontextprotocol/sdk/types.js';
+
+/**
+ * Measured 2026-11-14 on the estate's hosted endpoint: a major MCP client sends tool calls with
+ * mcp-protocol-version 2026-07-28, newer than this SDK knows, and the SDK answers 400.
+ * A well-formed date newer than the SDK's latest is served as the latest; malformed or
+ * older values are left for the SDK to reject.
+ */
+export function normalizeProtocolVersion(request) {
+    const v = request.headers.get('mcp-protocol-version')?.trim();
+    if (!v || !/^\d{4}-\d{2}-\d{2}$/.test(v) || v <= LATEST_PROTOCOL_VERSION)
+        return request;
+    const headers = new Headers(request.headers);
+    headers.set('mcp-protocol-version', LATEST_PROTOCOL_VERSION);
+    return new Request(request, { headers });
+}
+
 const CORS = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
@@ -24,7 +41,7 @@ async function handleMcp(request) {
     const server = createServer();
     const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
     await server.connect(transport);
-    return transport.handleRequest(request);
+    return transport.handleRequest(normalizeProtocolVersion(request));
 }
 export default {
     async fetch(request, env) {
